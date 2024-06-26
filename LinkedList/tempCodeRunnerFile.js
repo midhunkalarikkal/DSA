@@ -87,7 +87,6 @@ class singlyLinkedList {
     }
 
     removeSpecificValue(value){
-        let removeNode;
         let current = this.head
         let previous = null
 
@@ -119,21 +118,6 @@ class singlyLinkedList {
         return
     }
 
-    traverse(){
-        if(!this.isEmpty()){
-            let current = this.head
-            let listValues = ""
-            while(current){
-                listValues += ` ${current.value}`
-                current = current.next
-            }
-            console.log("list values ")
-            console.log(listValues)
-        }else{
-            console.log("linked is empty.")
-        }
-    }
-
     convertToArray(){
         if(!this.isEmpty()){
             let arr = []
@@ -146,6 +130,63 @@ class singlyLinkedList {
             console.log(arr)
         }else{
             console.log("list is empty!")
+        }
+    }
+
+    reverseTraverse(){
+        if(!this.isEmpty()){
+            let arr = []
+            let current = this.head
+            while(current){
+                arr.push(current.value)
+                current = current.next
+            }
+            console.log("Linked list printing in reverse")
+            for(let i = arr.length - 1; i >= 0; i--){
+                console.log(arr[i])
+            }
+        }else{
+            console.log("list is empty!")
+        }
+    }
+
+    removeDuplicates(){
+        if (this.isEmpty() || this.head.next === null) {
+            return;
+        }
+    
+        let current = this.head;
+
+    while (current !== null) {
+        let runner = current;
+
+        // Inner loop to compare current node with all subsequent nodes
+        while (runner.next !== null) {
+            if (current.value === runner.next.value) {
+                // Remove runner.next if its value matches current
+                runner.next = runner.next.next;
+                this.size--; // Decrease the size of the list
+            } else {
+                runner = runner.next; // Move runner to the next node
+            }
+        }
+
+        current = current.next; // Move current to the next node
+    }
+    }
+
+    traverse(){
+        if(!this.isEmpty()){
+            let current = this.head
+            let listValues = ""
+            while(current){
+                listValues += ` ${current.value}`
+                current = current.next
+            }
+            console.log("list values ")
+            console.log(listValues)
+        }else{
+            console.log("linked is empty.")
         }
     }
 }
@@ -174,4 +215,7 @@ list.removeFromIndex(5)
 list.traverse()
 list.convertToArray()
 list.removeSpecificValue(888)
+list.traverse()
+list.reverseTraverse()
+list.removeDuplicates()
 list.traverse()
