@@ -7,7 +7,7 @@ function countOccurence(arr,target){
     }
 
     if(count > 0){
-        console.log("Count : ",count)
+        console.log(`Occurence of ${target} in array : `,count)
         return
     }else{
         console.log("Element is not in the array")
