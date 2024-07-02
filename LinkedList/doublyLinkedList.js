@@ -36,7 +36,7 @@ class doublyLinkedList{
 
     append(value){
         const node = new Node(value)
-        if(this.isEmpty){
+        if(this.isEmpty()){
             this.head = node
             this.tail = node
         }else{

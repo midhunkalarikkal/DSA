@@ -113,7 +113,7 @@ class singlyLinkedList {
         }
 
         previous.next = current.next
-        this.size-
+        this.size--
         console.log("Node removed with value : ",value)
         return
     }
