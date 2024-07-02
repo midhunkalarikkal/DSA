@@ -1,9 +1,14 @@
-function power(base,exponent){
-    if(exponent === 0){
-        return 1
+function factorial(n){
+    if(n === 1 || n === 0){
+        return 1;
     }else{
-        return base * power(base,exponent-1)
+        return n * factorial(n-1)
     }
 }
 
-console.log(power(2,3))
+console.log(factorial(3))
+console.log(factorial(4))
+console.log(factorial(5))
+console.log(factorial(6))
+console.log(factorial(7))
+console.log(factorial(8))
