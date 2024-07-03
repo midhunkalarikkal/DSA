@@ -186,6 +186,22 @@ class singlyLinkedList {
             console.log("linked is empty.")
         }
     }
+
+    reverse() {
+        let prev = null;
+        let current = this.head;
+        let next = null;
+
+        while (current !== null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;      
+            current = next;      
+        }
+
+        this.head = prev; 
+        console.log("Linked list reversed");
+    }
 }
 const list = new singlyLinkedList()
 
@@ -215,4 +231,6 @@ list.removeSpecificValue(888)
 list.traverse()
 list.reverseTraverse()
 list.removeDuplicates()
+list.traverse()
+list.reverse()
 list.traverse()
