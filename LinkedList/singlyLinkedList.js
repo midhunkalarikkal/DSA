@@ -198,9 +198,23 @@ class singlyLinkedList {
             prev = current;      
             current = next;      
         }
-
-        this.head = prev; 
+        this.head = prev;
         console.log("Linked list reversed");
+    }
+
+    findMidPoint() {
+        if (this.isEmpty()) {
+            return null;
+        }
+        let slowPointer = this.head;
+        let fastPointer = this.head;
+        
+        while (fastPointer !== null && fastPointer.next !== null) {
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next.next;
+        }
+        
+        console.log("Mid point : ",slowPointer.value);
     }
 }
 const list = new singlyLinkedList()
@@ -221,6 +235,7 @@ list.append(60)
 list.append(80)
 list.append(20)
 list.append(90)
+list.append(100)    
 list.traverse()
 list.insert(888,4)
 list.traverse()
@@ -234,3 +249,4 @@ list.removeDuplicates()
 list.traverse()
 list.reverse()
 list.traverse()
+list.findMidPoint()

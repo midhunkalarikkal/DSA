@@ -6,15 +6,17 @@ class Node {
     }
 }
 
-class doublyLinkedList{
+class dll{
     constructor(){
         this.head = null
         this.tail = null
         this.size = 0
     }
-
+    
     isEmpty(){
-        return this.size === 0
+        if(this.size === 0){
+            return "List is empty"
+        }
     }
 
     getSize(){
@@ -48,28 +50,32 @@ class doublyLinkedList{
     }
 
     traverse(){
-        let result = "";
-        if (!this.isEmpty()) {
-            let current = this.head;
-            while (current !== null) {
-                result += ` ${current.value}`;
-                current = current.next;
+        if(this.isEmpty()){
+            return "List is empty"
+        }else{
+            let current = this.head
+            let str = ""
+            while(current){
+                str += ` ${current.value}`
+                current = current.next
             }
-        } else {
-            console.log("List is empty");
+            return str
         }
-        console.log(result)
     }
 }
 
-const list = new doublyLinkedList()
-console.log(list.getSize())
-console.log(list.isEmpty())
+const list = new dll()
+list.prepend(1)
+list.prepend(2)
+list.prepend(3)
+list.prepend(4)
 list.prepend(5)
 list.prepend(6)
-list.prepend(53)
-list.prepend(59)
-list.traverse()
-list.append(77)
-list.append(77)
-list.traverse()
+console.log(list.traverse())
+list.append(7)
+list.append(8)
+list.append(9)
+list.append(10)
+list.append(11)
+list.append(12)
+console.log(list.traverse())

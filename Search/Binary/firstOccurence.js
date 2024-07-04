@@ -10,14 +10,14 @@ function firstOccurence(arr,target){
         let mid = Math.floor((left+right) / 2)
         if(arr[mid] === target){
             result = mid
-            right = mid - 1
+            right = mid - 1;
         }else if(arr[mid] < target){
             left = mid + 1
         }else{  
             right = mid - 1
         }
     }
-    return result
+    return result;
 }
 
 const arr = [1,33,4,66,75,83,48,99,334,6,90,6633,57,89]
