@@ -32,14 +32,14 @@
 // salary = [4000,3000,1000,2000]
 // console.log(average(salary))
 
-async function demoSleep() {
-    console.log('Sleeping for 2 seconds...');
-    await sleep(2000);
-    console.log('Awake now!');
-}
+// async function demoSleep() {
+//     console.log('Sleeping for 2 seconds...');
+//     await sleep(2000);
+//     console.log('Awake now!');
+// }
 
-function sleep(millis){
-    return new Promise(resolve => setTimeout(resolve,millis))
-}
+// function sleep(millis){
+//     return new Promise(resolve => setTimeout(resolve,millis))
+// }
 
-demoSleep();
+// demoSleep();
