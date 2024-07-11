@@ -1,15 +1,12 @@
 class Stack{
     constructor(){
         this.items = []
-        this.count = 0
     }
 
-    //Check the stack is empty or not
     isEmpty(){
-        return this.count === 0
+        return this.items.length === 0
     }
 
-    //Push operation
     push(element){
         this.items[this.count] = element
         console.log(`${element} is add to ${this.count}`)
@@ -17,7 +14,6 @@ class Stack{
         return
     }
 
-    //Pop operation
     pop(){
         if(!this.isEmpty()){
             let deleteElement = this.items[this.count - 1]
@@ -29,17 +25,14 @@ class Stack{
         }
     }
 
-    //Chceck top element on stack
     peek(){
         console.log(`Peeking element : ${this.items[this.count - 1]}`)
     }
 
-    //Check the stack size
     getSize(){
         console.log(`Stack size : ${this.count}`)
     }
 
-    //Display the stack
     display(){
         if(!this.isEmpty()){
             let str = ""
@@ -52,7 +45,6 @@ class Stack{
         }
     }
 
-    //Clear stack
     clear(){
         this.items = []
         this.count = 0
