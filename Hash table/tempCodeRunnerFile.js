@@ -2,6 +2,7 @@ class HashTable{
     constructor(size){
         this.table = new Array(size)
         this.size = size
+        this.count = 0
     }
 
     hash(key){
@@ -25,6 +26,10 @@ class HashTable{
                 bucket.push([key,value])
             }
         }
+        this.count ++
+        if(this.count / this.size > 0.7){
+            this.resize()
+        }
     }
 
     get(key){
@@ -46,6 +51,7 @@ class HashTable{
             const itemIndex = bucket.findIndex(item => item[0] == key)
             if(itemIndex !== -1){
                 bucket.splice(itemIndex,1)
+                this.count--
             }
         }
     }
@@ -57,6 +63,26 @@ class HashTable{
             }
         }
     }
+
+    resize(){
+        const newSize = this.size * 2
+        const newTable = new HashTable(newSize)
+        const oldTable = this.table
+        this.table = newTable
+        this.size = newSize
+        this.count = 0
+        for(const bucket of oldTable){
+            if(bucket){
+                for(const [key , value] of bucket){
+                    this.set([key, value])
+                }
+            }
+        }
+    }
+
+    getSize(){
+        return this.size
+    }
 }
 
 const ht = new HashTable(50)
@@ -67,3 +93,6 @@ ht.set("dg","Dodge")
 ht.set("fr","Ferrari")
 ht.set("er","Entevour")
 ht.display()
+console.log("Size of table : ",ht.getSize())
+ht.resize()
+console.log("Size of table : ",ht.getSize())
