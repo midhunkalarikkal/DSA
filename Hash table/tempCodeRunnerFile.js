@@ -74,7 +74,7 @@ class HashTable{
         for(const bucket of oldTable){
             if(bucket){
                 for(const [key , value] of bucket){
-                    this.set([key, value])
+                    this.set(key, value)
                 }
             }
         }
@@ -91,7 +91,8 @@ ht.set("bntl","Bently")
 ht.set("cadil","Cadilac")
 ht.set("dg","Dodge")
 ht.set("fr","Ferrari")
-ht.set("er","Entevour")
+ht.set("er1","Entevour")
+ht.set("er2","Mercedes")
 ht.display()
 console.log("Size of table : ",ht.getSize())
 ht.resize()

@@ -1,6 +1,7 @@
 class Stack{
     constructor(){
         this.items = []
+        this.count = 0
     }
 
     isEmpty(){
