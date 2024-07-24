@@ -1,21 +1,29 @@
-const arr = [8, 5, 4, -8, 44, 82]
-
-function bubbleSortDescending(arr) {
-    let swapped
+function bubbleSort(arr){
     let n = arr.length
-    do {
+    let swapped
+    let count = 0
+    do{
         swapped = false
-        for (let i = 1; i < n; i++) {
-            if(arr[i] > arr[i-1]) {
-                let temp = arr[i]
-                arr[i] = arr[i-1]
-                arr[i-1] = temp
+        for(let i = 0; i < n-1; i++){
+            if(arr[i] > arr[i+1]){
+                [arr[i], arr[i+1]] = [arr[i+1] , arr[i]]
                 swapped = true
+                count++
             }
         }
-        n--
-    } while(swapped)
-    return arr
+    }while(swapped)
+        return {arr , count}
 }
 
-console.log(bubbleSortDescending(arr))
+
+const bestarr = [1,2,3,4,5,6,7,8,9]
+const avgarr = [9,8,7,6,5,4,3,2,1]
+const worstarr = [6,3,5,1,9,2,8,4,7]
+console.log("Best case")
+console.log(bubbleSort(bestarr))
+
+console.log("Average case")
+console.log(bubbleSort(avgarr))
+
+console.log("Worst case")
+console.log(bubbleSort(worstarr))

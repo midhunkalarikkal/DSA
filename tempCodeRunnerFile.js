@@ -1,48 +1,22 @@
-// function sort(arr) {
-//     let swapped
-//     do {
-//         swapped = false
-//         for (let i = 0; i < arr.length; i++) {
-//             if (arr[i] > arr[i + 1]) {
-//                 let temp = arr[i]
-//                 arr[i] = arr[i + 1]
-//                 arr[i + 1] = temp
-//                 swapped = true
-//             }
-//         }
-//     } while (swapped)
-//         return arr
-// }
-
-// function sort(arr){
-//     for(let i = 0; i < arr.length - 1; i++){
-//         let minIndex = i
-//         for(let j = i+1; j < arr.length; j++){
-//             if(arr[j] < arr[minIndex]){
-//                 minIndex = j
-//             }
-//         }
-
-//         if(minIndex !== i){
-//             let temp = arr[i]
-//             arr[i] = arr[minIndex]
-//             arr[minIndex] = temp
-//         }
-//     }
-//     return arr
-// }
-
-function sort(arr){
-    for(let i = 1; i < arr.length; i++){
-        let elementToInsert = arr[i]
-        let j = i -1
-        while(j >= 0 && arr[j] > elementToInsert){
-            arr[j+1] = arr[j]
-            j = j - 1
-        }
-        arr[j+1] = elementToInsert
+function quicksort(arr){
+    if(arr.length <= 1){
+        return arr
     }
-    return arr
+
+    const pivot = arr[arr.length - 1]
+    const left = []
+    const right = []
+
+    for(let i = 0; i < arr.length - 1; i++){
+        if(arr[i] < pivot){
+            left.push(arr[i])
+        }else{
+            right.push(arr[i])
+        }
+    }
+
+    return [...quicksort(left),pivot,...quicksort(right)]
 }
-const arr = [5,-7,2,22,47,64,83,59,-1]
-console.log(sort(arr))
+
+const arr = [4,63,77,-2,5,-66]
+console.log(quicksort(arr))

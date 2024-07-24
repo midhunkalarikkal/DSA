@@ -68,7 +68,7 @@ class HashTable{
         const newSize = this.size * 2
         const newTable = new HashTable(newSize)
         const oldTable = this.table
-        this.table = newTable
+        this.table = newTable.table
         this.size = newSize
         this.count = 0
         for(const bucket of oldTable){
