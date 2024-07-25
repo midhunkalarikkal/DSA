@@ -1,26 +1,34 @@
 class Queue{
     constructor(){
         this.items = []
+        this.count = 0
     }
 
     isEmpty(){
-        this.items.legth === 0 ? console.log("Queue is empty.") : console.log("Queue is not empty")
+        this.count === 0 ? console.log("Queue is empty.") : console.log("Queue is not empty")
         return
     }
 
     getSize(){
-        console.log("Size of queue is : ",this.items.length)
+        console.log("Size of queue is : ",this.count)
     }
 
     enqueue(element){
-        this.items.push(element)
+        this.items[this.count] = element
         console.log(element , "Is enqueued.")
-        return    }
+        this.count++
+        return    
+    }
 
     dequeue(){
         const deleteElement = this.items.shift()
+        // for(let i = 0; i < this.count-1; i++){
+        //     this.items[i] = this.items[i+1]
+        // }
+        // this.items.pop() 
         console.log(deleteElement , "is dequeued.")
-        return
+        this.count--
+        return deleteElement
     }
 
     peek(){
@@ -40,6 +48,7 @@ class Queue{
 
     clear(){
         this.items = []
+        this.count = 0
         console.log("Queue cleared.")
         return
     }

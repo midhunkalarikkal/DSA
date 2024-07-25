@@ -36,11 +36,9 @@ class Stack{
 
     display(){
         if(!this.isEmpty()){
-            let str = ""
             for(let i = 0; i < this.count; i++){
-                str += ` ${this.items[i]}`
+                console.log(`Stack ${i} : ${this.items[i]}`)
             }
-            console.log("Stack is : ",str)
         }else{
             console.log("Stack is empty")
         }
@@ -57,7 +55,9 @@ const stack = new Stack()
 stack.push(100)
 stack.push(200)
 stack.push(300)
+stack.display()
 stack.pop()
+stack.display()
 stack.push(400)
 stack.push(500)
 stack.push(600)
