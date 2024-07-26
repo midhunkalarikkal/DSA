@@ -426,82 +426,101 @@
 // console.log(stack.peek());
 // console.log(stack.getSize());
 
-class Node{
-    constructor(data){
-        this.data = data
-        this.next = null
-    }
-}
+// class Node{
+//     constructor(data){
+//         this.data = data
+//         this.next = null
+//     }
+// }
 
-class Queue{
-    constructor(){
-        this.head = null
-        this.tail = null
-        this.size = 0
-    }
+// class Queue{
+//     constructor(){
+//         this.head = null
+//         this.tail = null
+//         this.size = 0
+//     }
 
-    isEmpty(){
-        return this.size === 0
-    }
+//     isEmpty(){
+//         return this.size === 0
+//     }
 
-    getSize(){
-        return this.size
-    }
+//     getSize(){
+//         return this.size
+//     }
 
-    enqueue(data){
-        const newNode = new Node(data)
-        if(this.tail){
-            this.tail.next = newNode
-        }
-        this.tail = newNode
-        if(!this.head){
-            this.head = newNode
-        }
-        this.size++
-    }
+//     enqueue(data){
+//         const newNode = new Node(data)
+//         if(this.tail){
+//             this.tail.next = newNode
+//         }
+//         this.tail = newNode
+//         if(!this.head){
+//             this.head = newNode
+//         }
+//         this.size++
+//     }
 
-    dequeue(){
-        if(!this.isEmpty()){
-            const dequeuedData = this .head
-            this.head = this.head.next
-            if(!this.head){
-                this.tail = null
+//     dequeue(){
+//         if(!this.isEmpty()){
+//             const dequeuedData = this .head
+//             this.head = this.head.next
+//             if(!this.head){
+//                 this.tail = null
+//             }
+//             this.size--
+//             return dequeuedData.data
+//         }
+//     }
+
+//     peek(){
+//         if(!this.isEmpty()){
+//             return this.head.data
+//         }
+//     }
+
+//     display(){
+//         let current = this.head
+//         let str = ""
+//         while(current){
+//             str += ` ${current.data}`
+//             current = current.next
+//         }
+//         return str
+//     }
+// }
+
+// const queue = new Queue();
+// queue.enqueue(10);
+// queue.enqueue(20);
+// queue.enqueue(30);
+// console.log("Queue elements:");
+// console.log(queue.display())
+// console.log("Dequeued element: " + queue.dequeue());
+// console.log("Dequeued element: " + queue.dequeue());
+// console.log("Queue elements:");
+// console.log(queue.display())
+// console.log("Front element: " + queue.peek());
+// console.log("Is queue empty? " + queue.isEmpty());
+// console.log("Dequeued element: " + queue.dequeue());
+// console.log("Is queue empty? " + queue.isEmpty());
+
+function balance(expression){
+    let stack = []
+    for(let char of expression){
+        if(char === "{"){
+            stack.push(char)
+        }else if(char === "}"){
+            if(stack.length === 0 || stack.pop() !== "{"){
+                return false
             }
-            this.size--
-            return dequeuedData.data
         }
     }
-
-    peek(){
-        if(!this.isEmpty()){
-            return this.head.data
-        }
-    }
-
-    display(){
-        let current = this.head
-        let str = ""
-        while(current){
-            str += ` ${current.data}`
-            current = current.next
-        }
-        return str
-    }
+    return stack.length === 0
 }
 
-const queue = new Queue();
-queue.enqueue(10);
-queue.enqueue(20);
-queue.enqueue(30);
-console.log("Queue elements:");
-console.log(queue.display())
-console.log("Dequeued element: " + queue.dequeue());
-console.log("Dequeued element: " + queue.dequeue());
-console.log("Queue elements:");
-console.log(queue.display())
-console.log("Front element: " + queue.peek());
-console.log("Is queue empty? " + queue.isEmpty());
-console.log("Dequeued element: " + queue.dequeue());
-console.log("Is queue empty? " + queue.isEmpty());
+const expression1 = "{ { { } } }";
+const expression2 = "{ { } { } } }";
+console.log(balance(expression1));
+console.log(balance(expression2));
 
 
