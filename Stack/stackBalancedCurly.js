@@ -14,5 +14,5 @@ function balance(expression){
 
 const expression1 = "{ { { } } }";
 const expression2 = "{ { } { } } }";
-console.log(isBalancedBraces(expression1));
-console.log(isBalancedBraces(expression2));
+console.log(balance(expression1));
+console.log(balance(expression2));
