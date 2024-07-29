@@ -17,10 +17,27 @@ class Tree{
     
     insert(data){
         const newNode = new Node(data)
-        if(this.root === null){
-            this.root = newNode
+
+        if(this.root == null){
+            this.root = null
         }else{
-            insertRecursively(this.root, newNode)
+            const queue = [this.root]
+            while(queue.length){
+                const current = queue.shift()
+                if(current.left === null){
+                    current.left = newNode
+                    return
+                }else{
+                    queue.push(current.left)
+                }
+                if(current.right === null){
+                    current.right = newNode
+                    return
+                }else{
+                    queue.push(current.right)
+                }
+            }
         }
     }
+
 }
