@@ -94,4 +94,56 @@ class Tree{
         return node;
     }
 
+    deleteDeepestNode() {
+        if (this.root === null) return;
+        const queue = [this.root];
+        let node = null;
+        let parent = null;
+
+        while (queue.length) {
+            parent = queue.shift();
+            if (parent.left) {
+                if (parent.left.left === null && parent.left.right === null) {
+                    parent.left = null;
+                    return;
+                }
+                queue.push(parent.left);
+            }
+            if (parent.right) {
+                if (parent.right.left === null && parent.right.right === null) {
+                    parent.right = null;
+                    return;
+                }
+                queue.push(parent.right);
+            }
+        }
+    }
+
+    inorderTraversal(node = this.root, result = []) {
+        if (node) {
+            this.inorderTraversal(node.left, result);
+            result.push(node.data);
+            this.inorderTraversal(node.right, result);
+        }
+        return result;
+    }
+
+    preorderTraversal(node = this.root, result = []) {
+        if (node) {
+            result.push(node.data);
+            this.preorderTraversal(node.left, result);
+            this.preorderTraversal(node.right, result);
+        }
+        return result;
+    }
+
+    postorderTraversal(node = this.root, result = []) {
+        if (node) {
+            this.postorderTraversal(node.left, result);
+            this.postorderTraversal(node.right, result);
+            result.push(node.data);
+        }
+        return result;
+    }
+
 }
