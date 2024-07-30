@@ -72,5 +72,26 @@ class Tree{
                 }
             }
         }
+        if (nodeToDelete) {
+            const deepestNode = this.getDeepestNode();
+            if (deepestNode) {
+                nodeToDelete.data = deepestNode.data;
+                this.deleteDeepestNode();
+            }
+        }
     }
+
+    getDeepestNode() {
+        if (this.root === null) return null;
+        const queue = [this.root];
+        let node = null;
+
+        while (queue.length) {
+            node = queue.shift();
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+        return node;
+    }
+
 }
