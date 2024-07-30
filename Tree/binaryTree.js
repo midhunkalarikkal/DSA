@@ -40,4 +40,37 @@ class Tree{
         }
     }
 
+    delete(data){
+        if(this.root === null){
+            return null
+        }
+        if(thid.root.dta === data){
+            this.root = null
+            return
+        }
+        
+        let queue = [this.root]
+        let nodeToDelete = null
+        let parent = null
+
+        while(queue.length){
+            parent = queue.shift()
+
+            if(parent.left){
+                queue.push(parent.left)
+                if(parent.left.data === data){
+                    nodeToDelete = parent.left
+                    break
+                }
+            }
+
+            if(parent.right){
+                queue.push(parent.right)
+                if(parent.right.data === data){
+                    nodeToDelete = parent.right
+                    break
+                }
+            }
+        }
+    }
 }
