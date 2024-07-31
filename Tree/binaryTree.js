@@ -151,26 +151,37 @@ class Binarytree {
     return result;
   }
 
-  levelOrderTraversal(){
-    const  result = []
-    if(this.root === null){
-        return result
+  levelOrderTraversal() {
+    const result = [];
+    if (this.root === null) {
+      return result;
     }
 
-    const queue = [this.root]
-    while(queue.length){
-        const current = queue.shift()
-        result.push(current.data)
-        
-        if(current.left !== null){
-            queue.push(current.left)
-        }
+    const queue = [this.root];
+    while (queue.length) {
+      const current = queue.shift();
+      result.push(current.data);
 
-        if(current.right !== null){
-            queue.push(current.right)
-        }
+      if (current.left !== null) {
+        queue.push(current.left);
+      }
+
+      if (current.right !== null) {
+        queue.push(current.right);
+      }
     }
-    return result
+    return result;
+  }
+
+  height(node = this.root) {
+    if (node === null) {
+      return -1;
+    }
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 }
 
@@ -180,7 +191,8 @@ bt.insert(2);
 bt.insert(3);
 bt.insert(4);
 bt.insert(5);
-console.log("level order traversal : ",bt.levelOrderTraversal())
+console.log("level order traversal : ", bt.levelOrderTraversal());
 console.log(bt.inorderTraversal());
 console.log(bt.preorderTraversal());
 console.log(bt.postorderTraversal());
+console.log("Height of the binary tree : ", bt.height());
