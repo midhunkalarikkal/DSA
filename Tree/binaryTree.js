@@ -150,6 +150,28 @@ class Binarytree {
     }
     return result;
   }
+
+  levelOrderTraversal(){
+    const  result = []
+    if(this.root === null){
+        return result
+    }
+
+    const queue = [this.root]
+    while(queue.length){
+        const current = queue.shift()
+        result.push(current.data)
+        
+        if(current.left !== null){
+            queue.push(current.left)
+        }
+
+        if(current.right !== null){
+            queue.push(current.right)
+        }
+    }
+    return result
+  }
 }
 
 const bt = new Binarytree();
@@ -158,6 +180,7 @@ bt.insert(2);
 bt.insert(3);
 bt.insert(4);
 bt.insert(5);
+console.log("level order traversal : ",bt.levelOrderTraversal())
 console.log(bt.inorderTraversal());
 console.log(bt.preorderTraversal());
 console.log(bt.postorderTraversal());
