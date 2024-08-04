@@ -1,63 +1,29 @@
-class Stack{
-    constructor(){
-        this.items = []
-        this.size = 0
+function checkArray(arr,pieces){
+    let map = new Map()
+    
+    for(let piece of pieces){
+        map.set(piece[0],piece)
     }
 
-    isEmpty(){
-        return this.size === 0
-    }
+    console.log("map : ",map)
 
-    getSize(){
-        return this.size
-    }
-
-    push(element){
-        this.items[this.size] = element
-        this.size++
-    }
-
-    pop(){
-        if(!this.isEmpty()){
-            const poppedElement = this.items[this.size - 1]
-            this.size--
-            this.items.length = this.size
-            return poppedElement
-        }else{
-            console.log("Stack is empty")
-            return undefined
-        }
-    }
-
-    peek(){
-        if(!this.isEmpty()){
-            return this.items[this.size - 1]
-        }else{
-            console.log("Stack is empty")
-            return undefined
-        }
-    }
-
-    display(){
-        if(!this.isEmpty()){
-            for(let i = 0; i < this.size; i++){
-                console.log(this.items[i])
+    let i = 0;
+    while (i < arr.length) {
+        if (map.has(arr[i])) {
+            let piece = map.get(arr[i]);
+            for (let j = 0; j < piece.length; j++) {
+                if (arr[i + j] !== piece[j]) {
+                    return false;
+                }
             }
-        }else{
-            console.log("Stack is empty")
-            return undefined
+            i += piece.length;
+        } else {
+            return false;
         }
     }
+
+    return true;
 }
 
-const stack = new Stack();
-stack.push(10);
-stack.push(20);
-stack.push(30);
-console.log("Displaying")
-stack.display();
-console.log("Popped element : ",stack.pop());
-console.log("Peeeked element : ",stack.peek());
-console.log("Size of stack : ",stack.getSize());
-console.log("Displaying")
-stack.display();
+const arr = [15,88], pieces = [[88],[15]]
+console.log(checkArray(arr,pieces))
