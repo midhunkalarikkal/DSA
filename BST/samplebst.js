@@ -68,10 +68,6 @@ class bst{
         return node
     }
 
-    height(){
-
-    }
-
     inOrder(){
 
     }
@@ -89,5 +85,14 @@ class bst{
         this.inOrder(this.root, nodes)
         const midIndex =Math.floor(nodes.length / 2)
         return nodes[midIndex]
+    }
+
+    height(){
+        if(this.root === null){
+            return 0
+        }
+        const leftHeight = this.height(node.left)
+        const rightHeight = this.height(node.right)
+        return Math.max(leftHeight, rightHeight) + 1
     }
 }
