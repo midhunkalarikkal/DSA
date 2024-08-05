@@ -85,6 +85,9 @@ class bst{
     }
 
     midpoint(){
-
+        const nodes = []
+        this.inOrder(this.root, nodes)
+        const midIndex =Math.floor(nodes.length / 2)
+        return nodes[midIndex]
     }
 }
