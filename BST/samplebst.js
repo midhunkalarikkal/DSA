@@ -68,16 +68,31 @@ class bst{
         return node
     }
 
-    inOrder(){
-
+    inOrder(node = this.root, result = []){
+        if(node !== null){
+            this.inOrder(node.left, result)
+            result.push(node.data)
+            this.inOrder(node.right, result)
+        }
+        return result
     }
 
     preOrder(){
-
+        if(node !== null){
+            result.push(node.data)
+            this.preOrder(node.left, result)
+            this.preOrder(node.right, result)
+        }
+        return result
     }
 
     postOrder(){
-
+        if(node !== null){
+            this.postOrder(node.left, result)
+            this.postOrder(node.right, result)
+            result.push(node.data)
+        }
+        return result
     }
 
     midpoint(){
