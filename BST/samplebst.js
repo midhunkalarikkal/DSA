@@ -36,12 +36,36 @@ class bst{
         }
     }
 
-    delete(data){
+    delete(data, node = this.root){
+        if(node === null){
+            return node
+        }
 
+        if(data < node.data){
+            node.left = this.delete(data.node.left)
+        }else if(data > node.data){
+            node.right = this.delete(data, node.right)
+        }else{
+            if(node.left === null && node.right === null){
+                node = null
+            }else if(node.left === null){
+                node = node.right
+            }else if(node.right === null){
+                node = node.left
+            }else{
+                let minRight = this.finMinNode(node.right)
+                node.data = minRight.data
+                node.right = this.delete(minRight.data, node.right)
+            }
+        }
+        return node
     }
 
-    findMidNode(){
-
+    findMidNode(node){
+        while(node && node.left !== null){
+            node = node.left
+        }
+        return node
     }
 
     height(){
