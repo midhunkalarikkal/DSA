@@ -140,6 +140,20 @@ class bst{
         return this.isValidateBst(node.left, min, node.data) &&
         this.isValidateBst(node.right, node.data, max)
     }
+
+    search(node, data){
+        if(node === null){
+            return false
+        }else{
+            if(node.data === data){
+                return true
+            }else if(data < node.data){
+                return this.search(node.left, data)
+            }else{
+                return this.search(node.right, data)
+            }
+        }
+    }
 }
 
 let tree = new bst();
@@ -161,3 +175,8 @@ console.log("Closest value : ",tree.findClosestValue(23))
 console.log(tree.isValidateBst())
 tree.delete(15);
 console.log(tree.inOrder());
+console.log(tree.search(tree.root,5))
+console.log(tree.search(tree.root,10))
+console.log(tree.search(tree.root,7))
+console.log(tree.search(tree.root,99))
+console.log(tree.search(tree.root,2045))
