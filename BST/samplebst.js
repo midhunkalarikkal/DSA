@@ -105,6 +105,23 @@ class binarySearchTree{
         }
         return result
     }
+    
+    bfsLeveelOrder(){
+        let queue = []
+        let result = []
+        queue.push(this.root)
+        while(queue.length){
+            let current = queue.shift()
+            result.push(current.value)
+            if(current.left){
+                queue.push(current.left)
+            }
+            if(current.right){
+                queue.push(current.right)
+            }
+        }
+        return result
+    }
 
     // posto(root){
     //     if(root){
@@ -244,6 +261,7 @@ console.log("inOrder traversal : ",bst.inOrder())
 console.log("preOrder traversal : ",bst.preOrder())
 console.log("postOrder traversal : ",bst.postOrder())
 console.log("reverse traversal : ", bst.reverseOrder())
+console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
 
 // bst.io(bst.root)
 // bst.po(bst.root)
