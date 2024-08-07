@@ -62,14 +62,6 @@ class binarySearchTree{
         }
         return result
     }
-
-    // io(root){
-    //     if(root){
-    //         this.io(root.left)
-    //         console.log(root.value)
-    //         this.io(root.right)
-    //     }
-    // }
     
     preOrder(root = this.root, result = []){
         if(root !== null){
@@ -79,14 +71,6 @@ class binarySearchTree{
         }
         return result
     }
-
-    // po(root){
-    //     if(root){
-    //         console.log(root.value)
-    //         this.po(root.left)
-    //         this.po(root.right)
-    //     }
-    // }
 
     postOrder(root = this.root, result = []){
         if(root !== null){
@@ -169,137 +153,61 @@ class binarySearchTree{
         return root
     }
 
-    // posto(root){
-    //     if(root){
-    //         this.posto(root.left) 
-    //         this.posto(root.right)
-    //         console.log(root.value)
-    //     }
-    // }
+    midpoint(){
+        const nodes = this.inOrder()
+        const midIndex =Math.floor(nodes.length / 2)
+        return nodes[midIndex]
+    }
 
-    // delete(data, node = this.root){
-    //     if(node === null){
-    //         return null
-    //     }
+    height(root = this.root){
+        if(root === null){
+            return 0
+        }
+        const leftHeight = this.height(root.left)
+        const rightHeight = this.height(root.right)
+        return Math.max(leftHeight, rightHeight) + 1
+    }
 
-    //     if(data < node.data){
-    //         node.left = this.delete(data, node.left)
-    //     }else if(data > node.data){
-    //         node.right = this.delete(data, node.right)
-    //     }else{
-    //         if(node.left === null && node.right === null){
-    //             node = null
-    //         }else if(node.left === null){
-    //             node = node.right
-    //         }else if(node.right === null){
-    //             node = node.left
-    //         }else{
-    //             let minRight = this.findMinNode(node.right)
-    //             node.data = minRight.data
-    //             node.right = this.delete(minRight.data, node.right)
-    //         }
-    //     }
-    //     return node
-    // }
+    findClosestValue(target, root = this.root, closest = this.root.value){
+        if(root === null){
+            return closest
+        }
 
-    // findMinNode(node){
-    //     while(node && node.left !== null){
-    //         node = node.left
-    //     }
-    //     return node
-    // }
+        if(Math.abs(target - closest) > Math.abs(target - root.value)){
+            closest = root.value
+        }
 
-    // inOrder(node = this.root, result = []){
-    //     if(node !== null){
-    //         this.inOrder(node.left, result)
-    //         result.push(node.data)
-    //         this.inOrder(node.right, result)
-    //     }
-    //     return result
-    // }
+        if(target < root.value){
+            return this.findClosestValue(target, root.left, closest)
+        }else if(target > root.value){
+            return this.findClosestValue(target, root.right , closest)
+        }else{
+            return closest
+        }
+    }
 
+    isValidateBst(root = this.root , min = -Infinity, max = Infinity){
+        if(root === null){
+            return true
+        }
 
-    // postOrder(node = this.root, result = []){
-    //     if(node !== null){
-    //         this.postOrder(node.left, result)
-    //         this.postOrder(node.right, result)
-    //         result.push(node.data)
-    //     }
-    //     return result
-    // }
+        if(root.value <= min || root.value >= max){
+            return false
+        }
 
-    // midpoint(){
-    //     const nodes = this.inOrder()
-    //     const midIndex =Math.floor(nodes.length / 2)
-    //     return nodes[midIndex]
-    // }
-
-    // height(node = this.root){
-    //     if(node === null){
-    //         return 0
-    //     }
-    //     const leftHeight = this.height(node.left)
-    //     const rightHeight = this.height(node.right)
-    //     return Math.max(leftHeight, rightHeight) + 1
-    // }
-
-    // findClosestValue(target, node = this.root, closest = this.root.data){
-    //     if(node === null){
-    //         return closest
-    //     }
-
-    //     if(Math.abs(target - closest) > Math.abs(target - node.data)){
-    //         closest = node.data
-    //     }
-
-    //     if(target < node.data){
-    //         return this.findClosestValue(target, node.left, closest)
-    //     }else if(target > node.data){
-    //         return this.findClosestValue(target, node.right , closest)
-    //     }else{
-    //         return closest
-    //     }
-    // }
-
-    // isValidateBst(node = this.root , min = -Infinity, max = Infinity){
-    //     if(node === null){
-    //         return true
-    //     }
-
-    //     if(node.data <= min || node.data >= max){
-    //         return false
-    //     }
-
-    //     return this.isValidateBst(node.left, min, node.data) &&
-    //     this.isValidateBst(node.right, node.data, max)
-    // }
-
-    // bsf(){
-    //     let result = []
-    //     if(this.root === null){
-    //         return result
-    //     }
-
-    //     let queue = [this.root]
-    //     while(queue.length > 0){
-    //         let node = queue.shift()
-    //         result.push(node.data)
-
-    //         if(node.left !== null) queue.push(node.left)
-    //         if(node.right !== null) queue.push(node.right)
-    //     }
-    // return result
-    // }
+        return this.isValidateBst(root.left, min, root.value) &&
+        this.isValidateBst(root.right, root.value, max)
+    }
 }
 
 let bst = new binarySearchTree()
-console.log(bst.root)
 console.log("Tree is empty ? ",bst.isEmpty())
 bst.insert(10)
 bst.insert(5)
 bst.insert(15)
 bst.insert(3)
 bst.insert(7)
+console.log("root value : ",bst.root.value)
 console.log("searching 10 : ",bst.search(bst.root, 10))
 console.log("searching 5 : ",bst.search(bst.root, 5))
 console.log("searching 15 : ",bst.search(bst.root, 15))
@@ -311,9 +219,12 @@ console.log("reverse traversal : ", bst.reverseOrder())
 console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
 console.log("minimum value : ",bst.min())
 console.log("maximum value : ",bst.max())
+console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
+console.log(bst.midpoint())
+console.log("Height : ",bst.height())
 bst.delete(3)
 console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
-
-// bst.io(bst.root)
-// bst.po(bst.root)
-// bst.posto(bst.root)
+console.log("Height : ",bst.height())
+console.log("Closest value of 11 :",bst.findClosestValue(11))
+console.log("Is valid bst : ",bst.isValidateBst())
+console.log("Tree is empty ? ",bst.isEmpty())
