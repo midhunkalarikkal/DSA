@@ -139,9 +139,39 @@ class binarySearchTree{
         }
     }
 
+    delete(value){
+        this.root = this.deleteNode(this.root, value)
+    }
+    
+    deleteNode(root, value){
+        if(root === null){
+            return root
+        }
+
+        if(value < root.value){
+            root.left = this.deleteNode(root.left, value)
+        }else if(value > root.value){
+            root.right = this.deleteNode(root.right, value)
+        }else{
+            if(!root.left && !root.right){
+                return null
+            }
+
+            if(!root.left){
+                return root.right
+            }else if (!root.right){
+                return root.left
+            }
+
+            root.value = this.min(root.right)
+            root.right = this.deleteNode(root.right, root.value)
+        }
+        return root
+    }
+
     // posto(root){
     //     if(root){
-    //         this.posto(root.left)
+    //         this.posto(root.left) 
     //         this.posto(root.right)
     //         console.log(root.value)
     //     }
@@ -263,6 +293,7 @@ class binarySearchTree{
 }
 
 let bst = new binarySearchTree()
+console.log(bst.root)
 console.log("Tree is empty ? ",bst.isEmpty())
 bst.insert(10)
 bst.insert(5)
@@ -280,6 +311,8 @@ console.log("reverse traversal : ", bst.reverseOrder())
 console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
 console.log("minimum value : ",bst.min())
 console.log("maximum value : ",bst.max())
+bst.delete(3)
+console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
 
 // bst.io(bst.root)
 // bst.po(bst.root)

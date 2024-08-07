@@ -97,13 +97,85 @@ class binarySearchTree{
         return result
     }
 
-    posto(root){
-        if(root){
-            this.posto(root.left)
-            this.posto(root.right)
-            console.log(root.value)
+    reverseOrder(root = this.root, result = []){
+        if(root !== null){
+            this.reverseOrder(root.right, result)
+            result.push(root.value)
+            this.reverseOrder(root.left, result)
+        }
+        return result
+    }
+    
+    bfsLeveelOrder(){
+        let queue = []
+        let result = []
+        queue.push(this.root)
+        while(queue.length){
+            let current = queue.shift()
+            result.push(current.value)
+            if(current.left){
+                queue.push(current.left)
+            }
+            if(current.right){
+                queue.push(current.right)
+            }
+        }
+        return result
+    }
+    
+    min(root = this.root){
+        if(!root.left){
+            return root.value
+        }else{
+            return this.min(root.left)
         }
     }
+
+    max(root = this.root){
+        if(!root.right){
+            return root.value
+        }else{
+            return this.max(root.right)
+        }
+    }
+
+    delete(value){
+        this.root = this.deleteNode(this.root, value)
+    }
+    
+    deleteNode(root, value){
+        if(root === null){
+            return root
+        }
+
+        if(value < root.value){
+            root.left = this.deleteNode(root.left, value)
+        }else if(value > root.value){
+            root.right = this.deleteNode(root.right, value)
+        }else{
+            if(!root.left && !root.right){
+                return null
+            }
+
+            if(!root.left){
+                return root.right
+            }else if (!root.right){
+                return root.left
+            }
+
+            root.value = this.min(root.right)
+            root.right = this.deleteNode(root.right, root.value)
+        }
+        return root
+    }
+
+    // posto(root){
+    //     if(root){
+    //         this.posto(root.left) 
+    //         this.posto(root.right)
+    //         console.log(root.value)
+    //     }
+    // }
 
     // delete(data, node = this.root){
     //     if(node === null){
@@ -220,21 +292,37 @@ class binarySearchTree{
     // }
 }
 
+
+let bst1 = new binarySearchTree()
 let bst = new binarySearchTree()
+console.log(bst.root)
 console.log("Tree is empty ? ",bst.isEmpty())
 bst.insert(10)
 bst.insert(5)
 bst.insert(15)
 bst.insert(3)
 bst.insert(7)
-console.log("searching 10 : ",bst.search(bst.root, 10))
-console.log("searching 5 : ",bst.search(bst.root, 5))
-console.log("searching 15 : ",bst.search(bst.root, 15))
-console.log("searching 20 : ",bst.search(bst.root, 20))
-console.log("inOrder traversal : ",bst.inOrder())
-console.log("preOrder traversal : ",bst.preOrder())
-console.log("postOrder traversal : ",bst.postOrder())
+// console.log("searching 10 : ",bst.search(bst.root, 10))
+// console.log("searching 5 : ",bst.search(bst.root, 5))
+// console.log("searching 15 : ",bst.search(bst.root, 15))
+// console.log("searching 20 : ",bst.search(bst.root, 20))
+// console.log("inOrder traversal : ",bst.inOrder())
+// console.log("preOrder traversal : ",bst.preOrder())
+// console.log("postOrder traversal : ",bst.postOrder())
+// console.log("reverse traversal : ", bst.reverseOrder())
+console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
+// console.log("minimum value : ",bst.min())
+// console.log("maximum value : ",bst.max())
+// bst.delete(3)
 
 // bst.io(bst.root)
 // bst.po(bst.root)
-bst.posto(bst.root)
+// bst.posto(bst.root)
+
+console.log("bst1")
+console.log(bst1.root)
+console.log("Tree is empty ? ",bst1.isEmpty())
+bst1.insert(10)
+bst1.insert(13)
+bst1.insert(6)
+console.log("bfs level order traversal : ",bst1.bfsLeveelOrder())
