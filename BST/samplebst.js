@@ -122,6 +122,22 @@ class binarySearchTree{
         }
         return result
     }
+    
+    min(root = this.root){
+        if(!root.left){
+            return root.value
+        }else{
+            return this.min(root.left)
+        }
+    }
+
+    max(root = this.root){
+        if(!root.right){
+            return root.value
+        }else{
+            return this.max(root.right)
+        }
+    }
 
     // posto(root){
     //     if(root){
@@ -262,6 +278,8 @@ console.log("preOrder traversal : ",bst.preOrder())
 console.log("postOrder traversal : ",bst.postOrder())
 console.log("reverse traversal : ", bst.reverseOrder())
 console.log("bfs level order traversal : ",bst.bfsLeveelOrder())
+console.log("minimum value : ",bst.min())
+console.log("maximum value : ",bst.max())
 
 // bst.io(bst.root)
 // bst.po(bst.root)
