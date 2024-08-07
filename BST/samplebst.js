@@ -97,6 +97,15 @@ class binarySearchTree{
         return result
     }
 
+    reverseOrder(root = this.root, result = []){
+        if(root !== null){
+            this.reverseOrder(root.right, result)
+            result.push(root.value)
+            this.reverseOrder(root.left, result)
+        }
+        return result
+    }
+
     // posto(root){
     //     if(root){
     //         this.posto(root.left)
@@ -234,6 +243,7 @@ console.log("searching 20 : ",bst.search(bst.root, 20))
 console.log("inOrder traversal : ",bst.inOrder())
 console.log("preOrder traversal : ",bst.preOrder())
 console.log("postOrder traversal : ",bst.postOrder())
+console.log("reverse traversal : ", bst.reverseOrder())
 
 // bst.io(bst.root)
 // bst.po(bst.root)
