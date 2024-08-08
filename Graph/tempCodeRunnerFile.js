@@ -58,7 +58,9 @@ class Graph{
         const queue = [startVertex]
         const result = []
 
-        while(queue.length > 0){
+        visited.add(startVertex)
+
+        while(queue.length){
             const vertex = queue.shift()
             result.push(vertex)
 
@@ -71,6 +73,50 @@ class Graph{
         }
         return result
     }
+
+    dfs(startVertex){
+        const visited = new Set()
+        const stack = [startVertex]
+        const result = []
+
+        visited.add(startVertex)
+
+        while(stack.length){
+            const vertex = stack.pop()
+            result.push(vertex)
+
+            this.adjacencyList[vertex].forEach((neighbour)=>{
+                if(!visited.has(neighbour)){
+                    visited.add(neighbour)
+                    stack.push(neighbour)
+                }
+            })
+        }
+        return result
+    }
+
+    isCyclic(){
+        const visited = new Set()
+
+        const dfs = (vertex, parent)=>{
+            visited.add(vertex)
+
+            for(let neighbour of this.adjacencyList[vertex]){
+                if(!visited.has(neighbour)){
+                    if(dfs(neighbour, vertex)) return true
+                }else if(neighbour !== parent){
+                    return true
+                }
+            }
+            return false
+        }
+        for(let vertex in this.adjacencyList){
+            if(!visited.has(vertex)){
+                if(dfs(vertex, null)) return true
+            }
+        }
+        return false
+    }
 }
 
 const graph = new Graph()
@@ -81,6 +127,10 @@ graph.addVertex("C")
 graph.addEdge("A","B")
 graph.addEdge("B","C")
 
+console.log("bfs traversal : ",graph.bfs("A"))
+console.log("dfs traversal : ",graph.dfs("A"))
+console.log("isCyclic : ",graph.isCyclic())
+
 graph.display()
 
 console.log(graph.hasEdge("A", "B"))
@@ -90,5 +140,3 @@ graph.removeEdge("A", "B")
 graph.display()
 graph.removeVertex("B")
 graph.display()
-
-console.log("bfs traversal : ",graph.bfs("A"))
