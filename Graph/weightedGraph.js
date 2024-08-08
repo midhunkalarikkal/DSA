@@ -1,4 +1,4 @@
-class Graph{
+class WeightedGraph{
     constructor(){
         this.adjacencyList = {}
     }
@@ -27,7 +27,7 @@ class Graph{
     }
 }
 
-const graph = new Graph();
+const graph = new WeightedGraph();
 
 graph.addVertex("A");
 graph.addVertex("B");
