@@ -52,6 +52,27 @@ class Graph{
 
         delete this.adjacencyList[vertex]
     }
+
+    bfs(startVertex){
+        const visited = new Set()
+        const queue = [startVertex]
+        const result = []
+
+        visited.add(startVertex)
+
+        while(queue.length){
+            const vertex = queue.shift()
+            result.push(vertex)
+
+            this.adjacencyList[vertex].forEach((neighbour)=>{
+                if(!visited.has(neighbour)){
+                    visited.add(neighbour)
+                    queue.push(neighbour)
+                }
+            })
+        }
+        return result
+    }
 }
 
 const graph = new Graph()
@@ -61,6 +82,8 @@ graph.addVertex("C")
 
 graph.addEdge("A","B")
 graph.addEdge("B","C")
+
+console.log("bfs traversal : ",graph.bfs("A"))
 
 graph.display()
 

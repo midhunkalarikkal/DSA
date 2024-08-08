@@ -33,6 +33,44 @@ class Graph{
             this.adjacencyList[vertex2].has(vertex1)
         )
     }
+
+    removeEdge(vertex1, vertex2){
+        console.log(`Deleting the edge form the ${vertex1} to ${vertex2}`)
+        this.adjacencyList[vertex1].delete(vertex2)
+        this.adjacencyList[vertex2].delete(vertex1)
+    }
+
+    removeVertex(vertex){
+        if(!this.adjacencyList[vertex]){
+            return
+        }
+
+        console.log(`Deleting the vertex ${vertex}`)
+        for(let adjacentVertex of this.adjacencyList[vertex]){
+            this.removeEdge(vertex, adjacentVertex)
+        }
+
+        delete this.adjacencyList[vertex]
+    }
+
+    bfs(startVertex){
+        const visited = new Set()
+        const queue = [startVertex]
+        const result = []
+
+        while(queue.length > 0){
+            const vertex = queue.shift()
+            result.push(vertex)
+
+            this.adjacencyList[vertex].forEach((neighbour)=>{
+                if(!visited.has(neighbour)){
+                    visited.add(neighbour)
+                    queue.push(neighbour)
+                }
+            })
+        }
+        return result
+    }
 }
 
 const graph = new Graph()
@@ -46,3 +84,11 @@ graph.addEdge("B","C")
 graph.display()
 
 console.log(graph.hasEdge("A", "B"))
+console.log(graph.hasEdge("A", "C"))
+
+graph.removeEdge("A", "B")
+graph.display()
+graph.removeVertex("B")
+graph.display()
+
+console.log("bfs traversal : ",graph.bfs("A"))
