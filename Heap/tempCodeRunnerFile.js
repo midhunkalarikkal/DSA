@@ -105,6 +105,7 @@ const elements = [10, 15, 3, 55, 63, 102]
 for(let i of elements){
     minHeap.insert(i)
 }
+console.log("minHeap.heap : ",minHeap.heap)
 minHeap.buildHeap(elements);
 minHeap.display()
 

@@ -78,37 +78,16 @@ class MinHeap{
     height(){
         return Mathfloor(Math.log2(n))
     }
-
-    buildHeap(array){
-        this.heap = array
-        for (let i = Math.floor(this.heap.length / 2) - 1; i >= 0; i--) {
-            this.heapifyDown(i);
-        }
-    }
-
-    display(){
-        let level = 0
-        let count = 0
-
-        while(count < this.heap.length){
-            const numElements = Math.pow(2, level)
-            const levelElements = this.heap.slice(count, count + numElements)
-            console.log(`level ${level} : ${levelElements.join(", ")}`)
-            count += numElements
-            level++
-        }
-    }
 }
 
 const minHeap = new MinHeap();
-const elements = [10, 15, 3, 55, 63, 102]
-for(let i of elements){
-    minHeap.insert(i)
-}
-minHeap.buildHeap(elements);
-minHeap.display()
-
-console.log(minHeap.getMin());
-console.log(minHeap.extractMin());
-console.log(minHeap.getMin());
-minHeap.display()
+minHeap.insert(10)
+minHeap.insert(15)
+minHeap.insert(3)
+minHeap.insert(55)
+minHeap.insert(98)
+minHeap.insert(100)
+console.log("minHeap.heap : ",minHeap.heap)
+console.log(minHeap.getMin())
+console.log(minHeap.extractMin())
+console.log(minHeap.getMin())
