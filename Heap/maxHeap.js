@@ -101,3 +101,4 @@ console.log(heap.peek());
 console.log(heap.remove());
 
 console.log(heap.heap)
+
