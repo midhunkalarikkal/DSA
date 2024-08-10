@@ -1,24 +1,24 @@
 function heapSort(arr){
-    const heapifyDown = (arr , n , i) => {
-        let smallest = i
-        let left = 2 * i + 1
-        let right = 2 * i + 2
+    const heapifyDown = (arr, n , i) => {
+        let largest = i
+        const left = 2 * i + 1
+        const right = 2 * i + 2
 
-        if(left < n && arr[left] < arr[smallest]){
-            smallest = left
+        if(left < n && arr[left] > arr[largest]){
+            largest = left
         }
 
-        if(right < n && arr[right] < arr[smallest]){
-            smallest = right
+        if(right < n && arr[right] > arr[largest]){
+            largest = right
         }
 
-        if(smallest !== i){
-            [arr[i], arr[smallest]] = [arr[smallest], arr[i]]
-            heapifyDown(arr, n , smallest)
+        if(largest !== i){
+            [arr[i], arr[largest]] = [arr[largest], arr[i]]
+            heapifyDown(arr , n , largest)
         }
     }
 
-    const buildHeap = (arr) => {
+    const buildHeap = arr => {
         const n = arr.length
         for(let i = Math.floor((n/2) - 1); i >= 0; i--){
             heapifyDown(arr , n , i)

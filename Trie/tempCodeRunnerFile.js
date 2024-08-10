@@ -69,7 +69,7 @@ class Trie{
         }
         for(let i = 0; i < 26; i++){
             if(node.child[i] !== null){
-                this.disaply(node.child[i], prefix + String.fromCharCode(i + 'a'.charCodeAt(0)))
+                this.display(node.child[i], prefix + String.fromCharCode(i + 'a'.charCodeAt(0)))
             }
         }
     }

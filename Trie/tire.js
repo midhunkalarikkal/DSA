@@ -11,7 +11,7 @@ class Trie{
     }
 
     insertKey(key){
-        let current =this.root
+        let current = this.root
         for(let c of key){
             let index = c.charCodeAt(0) - "a".charCodeAt(0)
             if(current.child[index] === null){

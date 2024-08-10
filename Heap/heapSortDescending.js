@@ -38,3 +38,4 @@ function heapSort(arr){
 
 const arr = [4, 10, 3, 5, 1];
 console.log(heapSort(arr));
+
