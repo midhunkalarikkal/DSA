@@ -1,69 +1,32 @@
-class Node{
-    constructor(value){
-        this.value = value
-        this.left = null
-        this.right  = null
+function sumDigits(num) {
+    let sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num = Math.floor(num / 10);
     }
+    return sum;
 }
 
-class BinarySearchTree{
-    constructor(){
-        this.root = null
+function reduceToSingleDigit(num) {
+    while (num >= 10) {
+        num = sumDigits(num);
     }
+    return num;
+}
 
-    isEmpty(){
-        return this.root === null
-    }
-
-    inOrder(root = this.root, result = []){
-        if(root !== null){
-            this.inOrder(root.left, result)
-            result.push(root.value)
-            this.inOrder(root.right, result)
-        }
-        return result
-    }
-
-    largestNode(){
-        if(root === null){
-            return null
-        }else{
-            return this.root
-        }
-    }
-
-    insert(value){
-        const newNode = new Node(value)
-        if(this.root === null){
-            this.root = newNode
-        }else{
-            this.insertNode(this.root, newNode)
-        }
-    }
-
-    insertNode(root, newNode){
-        if(newNode.value < root.value){
-            if(root.left === null){
-                root.left = newNode
-            }else{
-                this.insertNode(root.left, newNode)
-            }
-        }
-        if(newNode.value > root.value){
-            if(root.right === null){
-                root.right = newNode
-            }else{
-                this.insertNode(root.right, newNode)
+function findNumbersWithDigitSumNine(arr) {
+    let result = [];
+    for (let num of arr) {
+        if (num >= 1000 && num <= 9999) { // Ensure it's a 4-digit number
+            let singleDigitSum = reduceToSingleDigit(sumDigits(num));
+            if (singleDigitSum === 9) {
+                result.push(num);
             }
         }
     }
+    return result;
 }
 
-const bst = new BinarySearchTree()
-bst.insert(4)
-bst.insert(6)
-bst.insert(2)
-bst.insert(8)
-bst.insert(7)
-console.log(bst.inOrder())
-console.log(bst.largestNode())
+// Example usage:
+let arr = [1236, 4563, 9870, 3459, 1998, 0o450];
+console.log(findNumbersWithDigitSumNine(arr)); // Example output: [1236, 4563, 3459]
