@@ -48,6 +48,31 @@ class BinaryTree{
         return result
     }
 
+    preOrder(root = this.root, result = []){
+        if(root !== null){
+            result.push(root.value)
+            this.preOrder(root.left, result)
+            this.preOrder(root.right, result)
+        }
+        return result
+    }
+
+    postOrder(root = this.root, result = []){
+        if(root !== null){
+            this.postOrder(root.left, result)
+            this.postOrder(root.right, result)
+            result.push(root.value)
+        }
+        return result
+    }
+
+    search(value){
+        if(this.root.value === value){
+            return true
+        }else{
+            
+        }
+    }
 }
 
 const bt = new BinaryTree()
@@ -59,3 +84,5 @@ bt.insert(99)
 bt.insert(67)
 bt.insert(85)
 console.log(bt.inOrder())
+console.log(bt.preOrder())
+console.log(bt.postOrder())
