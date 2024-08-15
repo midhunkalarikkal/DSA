@@ -1,32 +1,60 @@
-function sumDigits(num) {
-    let sum = 0;
-    while (num > 0) {
-        sum += num % 10;
-        num = Math.floor(num / 10);
+class Node{
+    constructor(value){
+        this.value = value
+        this.left = null
+        this.right = null
     }
-    return sum;
 }
 
-function reduceToSingleDigit(num) {
-    while (num >= 10) {
-        num = sumDigits(num);
+class BinaryTree{
+    constructor(){
+        this.root = null
     }
-    return num;
-}
 
-function findNumbersWithDigitSumNine(arr) {
-    let result = [];
-    for (let num of arr) {
-        if (num >= 1000 && num <= 9999) { // Ensure it's a 4-digit number
-            let singleDigitSum = reduceToSingleDigit(sumDigits(num));
-            if (singleDigitSum === 9) {
-                result.push(num);
+    isEmpty(){
+        return this.root === null
+    }
+
+    insert(value){
+        const newNode = new Node(value)
+        if(this.isEmpty()){
+            this.root = newNode
+        }else{
+            let queue = [this.root]
+            while(queue.length){
+                let current = queue.shift()
+                if(current.left === null){
+                    current.left = newNode
+                    return
+                }else{
+                    queue.push(current.left)
+                }
+                if(current.right === null){
+                    current.right = newNode
+                    return
+                }else{
+                    queue.push(current.right)
+                }
             }
         }
     }
-    return result;
+
+    inOrder(root = this.root, result = []){
+        if(root !== null){
+            this.inOrder(root.left, result)
+            result.push(root.value)
+            this.inOrder(root.right, result)
+        }
+        return result
+    }
 }
 
-// Example usage:
-let arr = [1236, 4563, 9870, 3459, 1998, 0o450];
-console.log(findNumbersWithDigitSumNine(arr)); // Example output: [1236, 4563, 3459]
+const bt = new BinaryTree()
+bt.insert(3)
+bt.insert(6)
+bt.insert(-2)
+bt.insert(7)
+bt.insert(99)
+bt.insert(67)
+bt.insert(85)
+console.log(bt.inOrder())

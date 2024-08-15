@@ -3,7 +3,7 @@ function midPoint(arr){
     let right = arr.length - 1
 
     while(left <= right){
-        let mid = Math.floor(left + right / 2)
+        let mid = Math.floor((left + right) / 2 )
         if(mid == left){
             break
         }
