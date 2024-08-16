@@ -155,7 +155,7 @@ class binarySearchTree{
 
     midpoint(){
         const nodes = this.inOrder()
-        const midIndex =Math.floor(nodes.length / 2)
+        const midIndex = Math.floor(nodes.length / 2)
         return nodes[midIndex]
     }
 

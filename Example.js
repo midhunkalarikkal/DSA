@@ -6,7 +6,7 @@ class Node{
     }
 }
 
-class BinaryTree{
+class BinarySearchTree{
     constructor(){
         this.root = null
     }
@@ -20,22 +20,89 @@ class BinaryTree{
         if(this.isEmpty()){
             this.root = newNode
         }else{
-            let queue = [this.root]
-            while(queue.length){
-                let current = queue.shift()
-                if(current.left === null){
-                    current.left = newNode
-                    return
-                }else{
-                    queue.push(current.left)
-                }
-                if(current.right === null){
-                    current.right = newNode
-                    return
-                }else{
-                    queue.push(current.right)
-                }
+            this.insertNode(this.root, newNode)
+        }
+    }
+
+    insertNode(root, newNode){
+        if(newNode.value < root.value){
+            if(root.left === null){
+                root.left = newNode
+            }else{
+                this.insertNode(root.left, newNode)
             }
+        }
+        if(newNode.value > root.value){
+            if(root.right === null){
+                root.right = newNode
+            }else{
+                this.insertNode(root.right, newNode)
+            }
+        }
+    }
+
+    min(root = this.root){
+        if(!root.left){
+            return root
+        }else{
+            return this.min(root.left)
+        }
+    }
+
+    max(root = this.root){
+        if(!root.right){
+            return root
+        }else{
+            return this.max(root.right)
+        }
+    }
+
+    delete(value){
+        this.root = this.deleteNode(this.root, value)
+    }
+
+    deleteNode(root, value){
+        if(root === null){
+            return root
+        }
+
+        if(value < root.value){
+            root.left = this.deleteNode(root.left, value)
+        }else if(value > root.value){
+            root.right = this.deleteNode(root.right, value)
+        }else{
+            if(!root.left && !root.right){
+                return null
+            }
+
+            if(!root.left){
+                return root.right
+            }else if(!root.right){
+                return root.left
+            }
+
+            const minNode = this.min(root.right)
+            root.value = minNode.value
+            root.right = this.deleteNode(root.right, root.value)
+        }
+        return root
+    }
+
+    findClosest(target, root = this.root, closest = this.root.value){
+        if(root === null){
+            return closest
+        }
+
+        if(Math.abs(target - closest) > Math.abs(target - root.value)){
+            closest = root.value
+        }
+
+        if(target < closest){
+            return this.findClosest(target, root.left, closest)
+        }else if(target > closest){
+            return this.findClosest(target, root.right, closest)
+        }else{
+            return closest
         }
     }
 
@@ -48,41 +115,70 @@ class BinaryTree{
         return result
     }
 
-    preOrder(root = this.root, result = []){
-        if(root !== null){
-            result.push(root.value)
-            this.preOrder(root.left, result)
-            this.preOrder(root.right, result)
-        }
-        return result
+    midPoint(){
+        const node = this.inOrder()
+        const midIndex = Math.floor(node.length / 2)
+        return node[midIndex]
     }
 
-    postOrder(root = this.root, result = []){
-        if(root !== null){
-            this.postOrder(root.left, result)
-            this.postOrder(root.right, result)
-            result.push(root.value)
+    search(root = this.root, value){
+        if(root === null){
+            return root
         }
-        return result
-    }
 
-    search(value){
-        if(this.root.value === value){
+        if(value === root.value){
             return true
+        }else if(value < root.value){
+            return this.search(root.left, value)
         }else{
-            
+            return this.search(root.right, value)
         }
+    }
+
+    height(root = this.root){
+        if(root === null){
+            return 0
+        }
+        const leftHeight = this.height(root.left)
+        const rightHeight = this.height(root.right)
+        return Math.max(leftHeight, rightHeight)+1
+    }
+
+    bfs(){
+        let queue = [this.root]
+        let result = []
+        while(queue.length){
+            let current = queue.shift()
+            result.push(current.value)
+            if(current.left){
+                queue.push(current.left)
+            }
+            if(current.right){
+                queue.push(current.right)
+            }
+        }
+        return result
     }
 }
 
-const bt = new BinaryTree()
-bt.insert(3)
-bt.insert(6)
-bt.insert(-2)
-bt.insert(7)
-bt.insert(99)
-bt.insert(67)
-bt.insert(85)
-console.log(bt.inOrder())
-console.log(bt.preOrder())
-console.log(bt.postOrder())
+const bst = new BinarySearchTree()
+console.log(bst.isEmpty())
+bst.insert(5)
+bst.insert(6)
+bst.insert(8)
+bst.insert(-2)
+bst.insert(56)
+bst.insert(33)
+bst.insert(30)
+console.log(bst.bfs())
+console.log(bst.inOrder())
+console.log(bst.search(5))
+console.log(bst.isEmpty())
+console.log(bst.min())
+console.log(bst.max())
+console.log(bst.midPoint())
+console.log(bst.height())
+bst.delete(5)
+console.log(bst.inOrder())
+console.log(bst.height())
+console.log("closest value : ",bst.findClosest(58))
