@@ -79,7 +79,7 @@ class Trie {
         for (let char of prefix) {
             let index = char.charCodeAt(0) - "a".charCodeAt(0);
             if (!node.child[index]) {
-                return []; // Return an empty array if the prefix is not found
+                return [];
             }
             node = node.child[index];
         }
@@ -100,7 +100,6 @@ class Trie {
     }
 }
 
-// Example usage
 let trie = new Trie();
 let words = ["and", "ant", "do", "geek", "dad", "ball"];
 for (let word of words) {

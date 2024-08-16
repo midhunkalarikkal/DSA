@@ -224,109 +224,399 @@
 // const arr = [4, 10, 3, 5, 1];
 // console.log(heapSort(arr));
 
-class MaxHeap{
+// class MaxHeap{
+//     constructor(){
+//         this.heap = []
+//     }
+
+//     getParentIndex(childIndex){
+//         return Math.floor((childIndex - 1) / 2)
+//     }
+//     getLeftChildIndex(parentIndex){
+//         return 2 * parentIndex + 1
+//     }
+//     getRightChildIndex(parentIndex){
+//         return 2 * parentIndex + 2
+//     }
+//     hasParent(index){
+//         return this.getParentIndex(index) >= 0
+//     }
+//     hasLeftChild(index){
+//         return this.getLeftChildIndex(index) < this.heap.length
+//     }
+//     hasRightChild(index){
+//         return this.getRightChildIndex(index) < this.heap.length
+//     }
+//     parent(index){
+//         return this.heap[this.getParentIndex(index)]
+//     }
+//     leftChild(index){
+//         return this.heap[this.getLeftChildIndex(index)]
+//     }
+//     rightChild(index){
+//         return this.heap[this.getRightChildIndex(index)]
+//     }
+
+//     swap(indexOne, indexTwo){
+//         const temp = this.heap[indexOne]
+//         this.heap[indexOne] = this.heap[indexTwo]
+//         this.heap[indexTwo] = temp
+//     }
+
+//     peek(){
+//         if(this.heap.length === 0){
+//             return null
+//         }else{
+//             return this.heap[0]
+//         }
+//     }
+
+//     add(item){
+//         this.heap.push(item)
+//         this.heapifyUp()
+//     }
+
+//     remove(){
+//         if(this.heap.length === 0){
+//             return null
+//         }
+
+//         const item = this.heap[0]
+//         this.heap[0] = this.heap[this.heap.length - 1]
+//         this.heap.pop()
+//         this.heapifyDown()
+//         return item
+//     }
+
+//     heapifyUp(){
+//         let index = this.heap.length - 1
+//         while(this.hasParent(index) && this.parent(index) < this.heap[index]){
+//             this.swap(this.getParentIndex(index), index)
+//             index = this.getParentIndex(index)
+//         }
+//     }
+
+//     heapifyDown(){
+//         let index = 0
+//         while(this.hasLeftChild(index)){
+//             let largerChildIndex = this.getLeftChildIndex(index)
+//             if(this.hasRightChild(index) && this.rightChild(index) > this.leftChild(index)){
+//                 largerChildIndex = this.getRightChildIndex(index)
+//             }
+
+//             if(this.heap[index] > this.heap[largerChildIndex]){
+//                 break
+//             }else{
+//                 this.swap(index, largerChildIndex)
+//             }
+
+//             index = largerChildIndex
+//         }
+//     }
+// }
+
+// var heap = new MaxHeap();
+
+// heap.add(10);
+// heap.add(15);
+// heap.add(30);
+// heap.add(40);
+// heap.add(50);
+// heap.add(100);
+// heap.add(40);
+// console.log(heap.heap)
+
+// console.log(heap.peek());
+// console.log(heap.remove());
+
+// console.log(heap.heap)
+
+// class Graph{
+//     constructor(){
+//         this.adjacencyList = {}
+//     }
+
+//     addVertex(vertex){
+//         if(!this.adjacencyList[vertex]){
+//             this.adjacencyList[vertex] = new Set()
+//         }
+//     }
+
+//     addEdge(vertex1, vertex2){
+//         if(!this.adjacencyList[vertex1]){
+//             this.addVertex(vertex1)
+//         }
+//         if(!this.adjacencyList[vertex2]){
+//             this.addVertex(vertex2)
+//         }
+        
+//         this.adjacencyList[vertex1].add(vertex2)
+//         this.adjacencyList[vertex2].add(vertex1)
+//     }
+
+//     hasEdge(vertex1, vertex2){
+//         return(
+//             this.adjacencyList[vertex1].has(vertex2) &&
+//             this.adjacencyList[vertex2].has(vertex1)
+//         )
+//     }
+
+//     removeEdge(vertex1, vertex2){
+//         this.adjacencyList[vertex1].delete(vertex2)
+//         this.adjacencyList[vertex2].delete(vertex1)
+//     }
+
+//     removeVertex(vertex){
+//         if(!this.adjacencyList[vertex]){
+//             return
+//         }
+
+//         for(let adjacentVertex of this.adjacencyList[vertex]){
+//             this.removeEdge(vertex, adjacentVertex)
+//         }
+
+//         delete this.adjacencyList[vertex]
+//     }
+
+//     display(){
+//         for(let vertex in this.adjacencyList){
+//             console.log(vertex+"--->"+[...this.adjacencyList[vertex]])
+//         }
+//     }
+
+//     bfs(startVertex){
+//         let visited = new Set()
+//         let queue = [startVertex]
+//         let result = []
+
+//         visited.add(startVertex)
+//         while(queue.length){
+//             let vertex = queue.shift()
+//             result.push(vertex)
+
+//             this.adjacencyList[vertex].forEach((neighbour)=>{
+//                 if(!visited.has(neighbour)){
+//                     visited.add(neighbour)
+//                     queue.push(neighbour)
+//                 }
+//             })
+//         }
+//         return result
+//     }
+    
+//     dfs(startVertex){
+//         let visited = new Set()
+//         let stack = [startVertex]
+//         let result = []
+
+//         visited.add(startVertex)
+//         while(stack.length){
+//             let vertex = stack.pop()
+//             result.push(vertex)
+
+//             this.adjacencyList[vertex].forEach((neighbour) => {
+//                 if(!visited.has(neighbour)){
+//                     visited.add(neighbour)
+//                     stack.push(neighbour)
+//                 }
+//             })
+//         }
+//         return result
+//     }
+
+//     isCyclic(){
+//         const visited = new Set()
+
+//         const dfs = (vertex, parent) => {
+//             visited.add(vertex)
+
+//             for(let neighbour of this.adjacencyList[vertex]){
+//                 if(!visited.has(neighbour)){
+//                     if(dfs(neighbour, vertex))return true
+//                 }else if(neighbour !== parent){
+//                     return true
+//                 }
+//             }
+//             return false
+//         }
+
+//         for(let vertex in this.adjacencyList){
+//             if(!visited.has(vertex)){
+//                 if(dfs(vertex, null))return true
+//             }
+//         }
+//         return false
+//     }
+
+//     shortestPath(startVertex, endVertex){
+//         if(!this.adjacencyList[startVertex] || !this.adjacencyList[endVertex]){
+//             return null
+//         }
+
+//         const queue = [startVertex]
+//         const distance = {[startVertex] : 0}
+//         const previous = {[startVertex] : null}
+
+//         while(queue.length){
+//             const vertex = queue.shift()
+
+//             if(vertex === endVertex){
+//                 const path = []
+//                 let current = endVertex
+//                 while(current !== null){
+//                     path.push(current)
+//                     current = previous[current]
+//                 }
+//                 return path.reverse()
+//             }
+
+//             this.adjacencyList[vertex].forEach((neighbour)=>{
+//                 if(distance[neighbour] === undefined){
+//                     queue.push(neighbour)
+//                     distance[neighbour] = distance[vertex]+1
+//                     previous[neighbour] = vertex
+//                 }
+//             })
+//         }
+//         return null
+//     }
+// }
+
+// const graph = new Graph()
+// graph.addVertex("A")
+// graph.addVertex("B")
+// graph.addVertex("C")
+// graph.addVertex("D")
+// graph.addVertex("E")
+
+// graph.addEdge("A","B")
+// graph.addEdge("B","C")
+// graph.addEdge("C","D")
+// graph.addEdge("B","D")
+// graph.addEdge("D","E")
+
+// console.log("shortest path : ",graph.shortestPath("A", "E"))
+
+// console.log("bfs traversal : ",graph.bfs("A"))
+// console.log("dfs traversal : ",graph.dfs("A"))
+// console.log("isCyclic : ",graph.isCyclic())
+
+// graph.display()
+
+// console.log(graph.hasEdge("A", "B"))
+// console.log(graph.hasEdge("A", "C"))
+
+// graph.removeEdge("A", "B")
+// graph.display()
+// graph.removeVertex("B")
+// graph.display()
+
+class TrieNode{
     constructor(){
-        this.heap = []
-    }
-
-    getParentIndex(childIndex){
-        return Math.floor((childIndex - 1) / 2)
-    }
-    getLeftChildIndex(parentIndex){
-        return 2 * parentIndex + 1
-    }
-    getRightChildIndex(parentIndex){
-        return 2 * parentIndex + 2
-    }
-    hasParent(index){
-        return this.getParentIndex(index) >= 0
-    }
-    hasLeftChild(index){
-        return this.getLeftChildIndex(index) < this.heap.length
-    }
-    hasRightChild(index){
-        return this.getRightChildIndex(index) < this.heap.length
-    }
-    parent(index){
-        return this.heap[this.getParentIndex(index)]
-    }
-    leftChild(index){
-        return this.heap[this.getLeftChildIndex(index)]
-    }
-    rightChild(index){
-        return this.heap[this.getRightChildIndex(index)]
-    }
-
-    swap(indexOne, indexTwo){
-        const temp = this.heap[indexOne]
-        this.heap[indexOne] = this.heap[indexTwo]
-        this.heap[indexTwo] = temp
-    }
-
-    peek(){
-        if(this.heap.length === 0){
-            return null
-        }else{
-            return this.heap[0]
-        }
-    }
-
-    add(item){
-        this.heap.push(item)
-        this.heapifyUp()
-    }
-
-    remove(){
-        if(this.heap.length === 0){
-            return null
-        }
-
-        const item = this.heap[0]
-        this.heap[0] = this.heap[this.heap.length - 1]
-        this.heap.pop()
-        this.heapifyDown()
-        return item
-    }
-
-    heapifyUp(){
-        let index = this.heap.length - 1
-        while(this.hasParent(index) && this.parent(index) < this.heap[index]){
-            this.swap(this.getParentIndex(index), index)
-            index = this.getParentIndex(index)
-        }
-    }
-
-    heapifyDown(){
-        let index = 0
-        while(this.hasLeftChild(index)){
-            let largerChildIndex = this.getLeftChildIndex(index)
-            if(this.hasRightChild(index) && this.rightChild(index) > this.leftChild(index)){
-                largerChildIndex = this.getRightChildIndex(index)
-            }
-
-            if(this.heap[index] > this.heap[largerChildIndex]){
-                break
-            }else{
-                this.swap(index, largerChildIndex)
-            }
-
-            index = largerChildIndex
-        }
+        this.child = new Array(26).fill(null)
+        this.wordEnd = null
     }
 }
 
-var heap = new MaxHeap();
+class Trie{
+    constructor(){
+        this.root = new TrieNode()
+    }
 
-heap.add(10);
-heap.add(15);
-heap.add(30);
-heap.add(40);
-heap.add(50);
-heap.add(100);
-heap.add(40);
-console.log(heap.heap)
+    insertKey(key){
+        let current = this.root
+        for(let c of key){
+            let index = c.charCodeAt(0) - "a".charCodeAt(0)
+            if(current.child[index] === null){
+                current.child[index] = new TrieNode()
+            }
+            current = current.child[index]
+        }
+        current.wordEnd = true
+    }
 
-console.log(heap.peek());
-console.log(heap.remove());
+    deleteKey(key){
+        const deleteRecursively = (node, key, depth = 0) => {
+            if(!node) return false
+            if(node.wordEnd){
+                node.wordEnd = null
+                node.child.every(child => child === null)
+            }else{
+                let index = key[depth].charCodeAt(0) - "a".charCodeAt(0)
+                if(deleteRecursively(node.child[index],key, depth+1)){
+                    node.child[index] = null
+                    return !node.wordEnd && node.child.every(child => child === null)
+                }
+            }
+            return false
+        }
+        deleteRecursively(this.root, key)
+    }   
 
-console.log(heap.heap)
+    display(node = this.root, prefix = ""){
+        if(node.wordEnd){
+            console.log(prefix)
+        }
+        for(let i = 0; i < 26; i++){
+            if(node.child[i] !== null){
+                this.display(node.child[i], prefix + String.fromCharCode(i + "a".charCodeAt(0)))
+            }
+        }
+    }
+
+    prefixSearch(prefix){
+        let node = this.root
+        for(let char of prefix){
+            let index = char.charCodeAt(0)-"a".charCodeAt(0)
+            if(!node.child[index]){
+                return []
+            }
+            node = node.child[index]
+        }
+        return this.collectAllWords(node, prefix)
+    }
+
+    collectAllWords(node, prefix){
+        let words = []
+        if(node.wordEnd){
+            words.push(prefix)
+        }
+        for(let i = 0; i < 26; i++){
+            if(node.child[i] !== null){
+                words = words.concat(this.collectAllWords(node.child[i], prefix + String.fromCharCode(i + "a".charCodeAt(0))))
+            }
+        }
+        return words
+    }
+
+    searchKey(key){
+        let current = this.root
+        for(let c of key){
+            let index = c.charCodeAt(0) - "a".charCodeAt(0)
+            if(current.child[index] === null) return false
+            current = current.child[index]
+        }
+        return current.wordEnd
+    }
+}
+
+let trie = new Trie();
+let words = ["and", "ant", "do", "geek", "dad", "ball"];
+for (let word of words) {
+    trie.insertKey(word);
+}
+
+console.log("Words in Trie:");
+trie.display();
+
+let searchKeys = ["do", "gee", "bat"];
+for (let word of searchKeys) {
+    console.log("Key:", word);
+    console.log(trie.searchKey(word) ? "Present" : "Not Present");
+}
+
+trie.deleteKey("geek");
+console.log("Search 'geek' after deletion:", trie.searchKey("geek") ? "Present" : "Not Present");
+
+console.log("Prefix search 'an':", trie.prefixSearch("an"));  
+console.log("Prefix search 'ba':", trie.prefixSearch("ba"));  
