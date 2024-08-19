@@ -23,4 +23,37 @@ class Graph{
         }
         return false
     }
+    
+    shortestPath(startVertex, endVertex){
+        if(!this.adjacencyList[startVertex] || !this.adjacencyList[endVertex]){
+            return null
+        }
+
+        const queue = [startVertex]
+        const distance = {[startVertex] : 0}
+        const previous = {[startVertex] : null}
+
+        while(queue.length){
+            const vertex = queue.shift()
+
+            if(vertex === endVertex){
+                const path = []
+                let current = endVertex
+                while(current !== null){
+                    path.push(current)
+                    current = previous[current]
+                }
+                return path.reverse()
+            }
+
+            this.adjacencyList[vertex].forEach((neighbour)=>{
+                if(distance[neighbour] === undefined){
+                    queue.push(neighbour)
+                    distance[neighbour] = distance[vertex]+1
+                    previous[neighbour] = vertex
+                }
+            })
+        }
+        return null
+    }
 }
