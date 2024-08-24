@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Search with Trie</title>
+    <style>
+        body {
+            font-family: Arial, san-serif;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .autocomplete-container {
+            position: relative;
+            width: 100%;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suugestions div:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="text-center">
+            <h1>Auto complete suggestions using Trie</h1>
+            <hr>
+            <div class="autocomplete-container">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+
+</html>
