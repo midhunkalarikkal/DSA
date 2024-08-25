@@ -64,7 +64,70 @@
         </div>
     </div>
     <script>
+        class TrieNode{
+            constructor(){
+                this.cildren = {}
+                this.isEndOfWord = false
+            }
+        }
 
+        class Trie{
+            constructor(){
+                this.root = new TrieNode()
+            }
+            
+            insert(word){
+                let node = this.node
+                for(let char of word){
+                    if(!node.childre[char]){
+                        node.children[char] = new TrieNode()
+                    }
+                    node = node.children[char]
+                }
+                node.isEndOfWord = true
+            }
+
+            search(word){
+                let node = this.root
+                for(let char of word){
+                    if(!node.childre[char]){
+                        return false
+                    }
+                    node = node.childre[char]
+                }
+                return node.isEndOfWord
+            }
+
+            startsWith(prefix){
+                let node = this.root
+                for(let char of word){
+                    if(!node.childre[char]){
+                        return []
+                    }
+                    node = node.childre[char]
+                }
+                return this.getWordsFromNode(node, prefix)
+            }
+            
+            getWordsFromNode(node, prefix){
+                let words = []
+                if(node.isEndOfWord){
+                    words.push(prefix)
+                }
+                for(let char in node.childre){
+                    words = words.concat(this.getWordsFromNode(node.childre[char],prefix+char))
+                }
+                return words
+            }
+        }
+
+        const trie = new Trie()
+        const words = ["apple", "app", "banana", "band", "bandana", "bandit", "can", "candy", "cat", "cater"]
+        words.forEach(word => trie.insert(word))
+
+        //Auto complete logic
+
+        const searchInput = document.getElementById('searchInput')
     </script>
 </body>
 
