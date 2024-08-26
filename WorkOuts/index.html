@@ -64,22 +64,22 @@
         </div>
     </div>
     <script>
-        class TrieNode{
-            constructor(){
-                this.cildren = {}
+        class TrieNode {
+            constructor() {
+                this.children = {}
                 this.isEndOfWord = false
             }
         }
 
-        class Trie{
-            constructor(){
+        class Trie {
+            constructor() {
                 this.root = new TrieNode()
             }
-            
-            insert(word){
-                let node = this.node
-                for(let char of word){
-                    if(!node.childre[char]){
+
+            insert(word) {
+                let node = this.root
+                for (let char of word) {
+                    if (!node.children[char]) {
                         node.children[char] = new TrieNode()
                     }
                     node = node.children[char]
@@ -87,47 +87,67 @@
                 node.isEndOfWord = true
             }
 
-            search(word){
+            search(word) {
                 let node = this.root
-                for(let char of word){
-                    if(!node.childre[char]){
+                for (let char of word) {
+                    if (!node.children[char]) {
                         return false
                     }
-                    node = node.childre[char]
+                    node = node.children[char]
                 }
                 return node.isEndOfWord
             }
 
-            startsWith(prefix){
+            startsWith(prefix) {
                 let node = this.root
-                for(let char of word){
-                    if(!node.childre[char]){
+                for (let char of prefix) {
+                    if (!node.children[char]) {
                         return []
                     }
-                    node = node.childre[char]
+                    node = node.children[char]
                 }
                 return this.getWordsFromNode(node, prefix)
             }
-            
-            getWordsFromNode(node, prefix){
+
+            getWordsFromNode(node, prefix) {
                 let words = []
-                if(node.isEndOfWord){
+                if (node.isEndOfWord) {
                     words.push(prefix)
                 }
-                for(let char in node.childre){
-                    words = words.concat(this.getWordsFromNode(node.childre[char],prefix+char))
+                for (let char in node.children) {
+                    words = words.concat(this.getWordsFromNode(node.children[char], prefix + char))
                 }
                 return words
             }
         }
 
-        const trie = new Trie()
-        const words = ["apple", "app", "banana", "band", "bandana", "bandit", "can", "candy", "cat", "cater"]
-        words.forEach(word => trie.insert(word))
+        const trie = new Trie();
+        const words = ["apple", "app", "banana", "band", "bandana", "bandit", "can", "candy", "cat", "cater"];
+        words.forEach(word => trie.insert(word));
 
-        //Auto complete logic
+        // Autocomplete logic
+        const searchInput = document.getElementById("searchInput");
+        const suggestionsContainer = document.getElementById("suggestions");
 
-        const searchInput = document.getElementById('searchInput')
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value;
+            const suggestions = trie.startsWith(query);
+            suggestionsContainer.innerHTML = "";
+
+            if (query === "" || suggestions.length === 0) {
+                return;
+            }
+
+            suggestions.forEach(suggestion => {
+                const suggestionElement = document.createElement("div");
+                suggestionElement.textContent = suggestion;
+                suggestionElement.addEventListener("click", () => {
+                    searchInput.value = suggestion;
+                    suggestionsContainer.innerHTML = "";
+                });
+                suggestionsContainer.appendChild(suggestionElement);
+            });
+        });
     </script>
 </body>
 
