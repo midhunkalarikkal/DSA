@@ -12,7 +12,7 @@ function bubbleSort(arr){
             }
         }
     }while(swapped)
-        return {arr , count}
+    return {arr , count}
 }
 
 

@@ -77,13 +77,13 @@ const flatarrres = flatarr.flat(Infinity)
 console.log(flatarrres)
 
 //some
-// The some method tests whether at least one element in the array passes the provided
+// The some method tests whether at least one element in the array passes the provided condition
 let somearr = [ 1,2,3,5,7,9]
 let somearrres = somearr.some(a => a%2 === 0)
 console.log(somearrres)
 
 //every
-// The every method tests whether all elements in the array pass the provided function.
+// The every method tests whether all elements in the array pass the provided condition.
 let everyarr = [2,4,6,8]
 let everyarrres = everyarr.every(a => a%2 === 0)
 console.log(everyarrres)

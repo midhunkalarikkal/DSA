@@ -16,29 +16,28 @@ class binarySearchTree{
     }
 
     insert(value){
-        const newNode = new Node(value)
+        const newNode = new Node(value);
         if(this.isEmpty()){
-            this.root = newNode
+            this.root = newNode;
         }else{
-            this.insertNode(this.root, newNode)
+            let current = this.root;
+            while(true){
+                if(value < current.value){
+                    if(current.left === null){
+                        current.left = newNode;
+                        break;
+                    }
+                    current = current.left;
+                }else{
+                    if(current.right === null){
+                        current.right = newNode;
+                        break;
+                    }
+                    current = current.right;
+                }
+            }
         }
     } 
-
-    insertNode(root, newNode){
-        if(newNode.value < root.value){
-            if(root.left === null){
-                root.left = newNode
-            }else{
-                this.insertNode(root.left , newNode)
-            }
-        }else{
-            if(root.right === null){
-                root.right = newNode
-            }else{
-                this.insertNode(root.right, newNode)
-            }
-        }
-    }
 
     search(root, value){
         if(!root){

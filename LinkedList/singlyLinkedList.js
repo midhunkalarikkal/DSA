@@ -38,7 +38,7 @@ class singlyLinkedList {
             let prev = this.head
             while(prev.next){
                 prev = prev.next
-            }
+             }
             prev.next = node
         }
         this.size++

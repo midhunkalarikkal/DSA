@@ -48,7 +48,7 @@ class Graph{
         console.log(`Deleting the vertex ${vertex}`)
         for(let adjacentVertex of this.adjacencyList[vertex]){
             this.removeEdge(vertex, adjacentVertex)
-        }
+        } 
 
         delete this.adjacencyList[vertex]
     }
@@ -82,15 +82,18 @@ class Graph{
         visited.add(startVertex)
 
         while(stack.length){
-            const vertex = stack.pop()
-            result.push(vertex)
+            const vertex = stack.pop();
 
-            this.adjacencyList[vertex].forEach((neighbour)=>{
-                if(!visited.has(neighbour)){
-                    visited.add(neighbour)
-                    stack.push(neighbour)
+        if (!visited.has(vertex)) {
+            visited.add(vertex);
+            result.push(vertex);
+
+            this.adjacencyList[vertex].forEach(neighbour => {
+                if (!visited.has(neighbour)) {
+                    stack.push(neighbour);
                 }
-            })
+            });
+        }
         }
         return result
     }

@@ -44,6 +44,11 @@ class MaxHeap {
         return this.heap[0];
     }
 
+    add(item) {
+        this.heap.push(item);
+        this.heapifyUp();
+    }
+
     remove() {
         if (this.heap.length === 0) {
             return null;
@@ -53,11 +58,6 @@ class MaxHeap {
         this.heap.pop();
         this.heapifyDown();
         return item;
-    }
-
-    add(item) {
-        this.heap.push(item);
-        this.heapifyUp();
     }
 
     heapifyUp() {
